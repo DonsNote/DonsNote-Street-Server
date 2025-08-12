@@ -9,4 +9,8 @@ const router = Router();
 /* Signup */
 router.post('/', authController.handleAuth);
 
+// New routes for email verification
+router.post('/send-verification-code', authController.sendVerificationCode);
+router.post('/verify-email-code', authController.verifyEmailCode);
+
 export default router;
