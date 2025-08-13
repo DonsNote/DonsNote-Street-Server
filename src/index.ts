@@ -25,7 +25,7 @@ app.use('/artists', artistRouter);
 app.use('/buskings', buskingRouter);
 app.use('/reports', reportsRouter);
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, 'localhost', () => {
   console.log(`🚀 DonsServer running at http://0.0.0.0:${port}`);
 });
 
