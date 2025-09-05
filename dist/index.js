@@ -3,8 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
+// Load environment variables first
+dotenv_1.default.config();
+const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const artist_router_1 = __importDefault(require("./routers/artist.router"));
@@ -12,7 +14,6 @@ const auth_router_1 = __importDefault(require("./routers/auth.router"));
 const busking_router_1 = __importDefault(require("./routers/busking.router"));
 const report_router_1 = __importDefault(require("./routers/report.router"));
 const user_router_1 = __importDefault(require("./routers/user.router"));
-dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = Number(process.env.PORT) || 5000;
 app.use((0, cors_1.default)());
@@ -42,7 +43,7 @@ app.get('/policy', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '../src/policy.html'));
 });
 // 404 handler
-app.use('*', (req, res) => {
+app.use((req, res) => {
     res.status(404).json({
         success: false,
         error: 'Route not found',

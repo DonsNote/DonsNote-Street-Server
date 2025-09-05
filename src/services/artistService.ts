@@ -11,7 +11,7 @@ export class ArtistService {
             .from('Artist')
             .select(`
                 *,
-                User (name, email, userImgURL)
+                User!Artist_userId_fkey (name, email, userImgURL)
             `)
             .order('id', { ascending: false });
 
@@ -24,8 +24,7 @@ export class ArtistService {
             .from('Artist')
             .select(`
                 *,
-                User (name, email, userImgURL),
-                Busking (*)
+                User!Artist_userId_fkey (name, email, userImgURL)
             `)
             .eq('id', id)
             .single();
@@ -89,7 +88,7 @@ export class ArtistService {
             .from('Artist')
             .select(`
                 *,
-                User (name, userImgURL)
+                User!Artist_userId_fkey (name, userImgURL)
             `)
             .ilike('genres', `%${genre}%`);
 

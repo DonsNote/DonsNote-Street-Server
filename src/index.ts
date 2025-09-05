@@ -1,5 +1,9 @@
-import cors from 'cors';
 import dotenv from 'dotenv';
+
+// Load environment variables first
+dotenv.config();
+
+import cors from 'cors';
 import express, { Request, Response } from 'express';
 import path from 'path';
 import artistRouter from './routers/artist.router';
@@ -7,8 +11,6 @@ import authRouter from './routers/auth.router';
 import buskingRouter from './routers/busking.router';
 import reportsRouter from './routers/report.router';
 import userRouter from './routers/user.router';
-
-dotenv.config();
 
 const app = express();
 const port = Number(process.env.PORT) || 5000;
@@ -45,7 +47,7 @@ app.get('/policy', (req: Request, res: Response) => {
 });
 
 // 404 handler
-app.use('*', (req: Request, res: Response) => {
+app.use((req: Request, res: Response) => {
     res.status(404).json({
         success: false,
         error: 'Route not found',

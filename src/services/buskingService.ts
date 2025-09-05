@@ -11,11 +11,11 @@ export class BuskingService {
             .from('Busking')
             .select(`
                 *,
-                Artist (
+                Artist!Busking_artistId_fkey (
                     artistName,
                     artistImgURL,
                     genres,
-                    User (name)
+                    User!Artist_userId_fkey (name)
                 )
             `)
             .order('startTime', { ascending: true });
@@ -29,7 +29,7 @@ export class BuskingService {
             .from('Busking')
             .select(`
                 *,
-                Artist (
+                Artist!Busking_artistId_fkey (
                     artistName,
                     artistInfo,
                     artistImgURL,
@@ -37,7 +37,7 @@ export class BuskingService {
                     youtubeURL,
                     instarURL,
                     soundURL,
-                    User (name, email)
+                    User!Artist_userId_fkey (name, email)
                 )
             `)
             .eq('id', id)
